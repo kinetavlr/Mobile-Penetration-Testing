@@ -2,11 +2,13 @@
 
 > Vulnerability Assessment conducted as part of the *Mobile Penetration Testing* course, Group 4. Target: an internal Android application used to manage dormitory operations at a university.
 >
-> **Note on scope:** This repository contains a sanitized, high-level summary only. The full technical report (including exact endpoints, tokens, and proof-of-concept scripts) is **not published here**, since the target application was live/in production at the time of testing and some findings may still be unremediated. Sharing exploitable details publicly could put real users' data at risk. The complete report is available privately on request (e.g. for academic or recruiting purposes).
+>**Note on scope:** This repository contains a sanitized, high-level summary only. The full technical report (including exact endpoints, tokens, and proof-of-concept scripts) is **not published here**, since the target application was live/in production at the time of testing and some findings may still be unremediated. Sharing exploitable details publicly could put real users' data at risk. The complete report is available privately on request (e.g. for academic or recruiting purposes).
 
 ## Overview
 
-This project was a black-box / static-analysis security assessment of an Android application (React Native + Hermes bytecode) used to support dormitory operations for a university residence. The goal was to identify vulnerabilities that could compromise user data, backend integrity, or service availability, and to recommend remediations following industry standards.
+Our team of 5 carried out a black-box / static-analysis security assessment on an Android application (React Native + Hermes bytecode) used to support dormitory operations for a university residence. We worked collaboratively across the whole pipeline — reverse-engineering the APK, testing the backend API, and scoring/documenting findings — rather than splitting strictly by finding, so all of us touched most parts of the process.
+
+The goal was to identify vulnerabilities that could compromise user data, backend integrity, or service availability, and to recommend remediations following industry standards.
 
 ## Methodology
 
@@ -37,12 +39,9 @@ This project was a black-box / static-analysis security assessment of an Android
 
 *(Exact locations, tokens, and endpoints are withheld from this public summary.)*
 
-### Key Takeaways
+## What I Took Away From This
 
-- **Client-side secrets are not secrets.** Anything shipped inside an APK — API tokens, encryption keys, backend URLs — can be recovered by an attacker with basic reverse-engineering tools. Secrets belong server-side only.
-- **A single shared encryption key defeats the purpose of encryption.** When every install of an app uses the same key, an attacker who extracts it from one copy can decrypt or forge traffic for *every* user.
-- **Authorization must be enforced server-side**, not assumed from client behavior — endpoints without server-side authorization checks are exploitable regardless of what the UI allows.
-- **Cloud storage/CDN links should never double as access control.** A "hidden" but unauthenticated link is not private if anyone with the link (or an active account in a shared tenant) can browse it.
+The biggest lesson for me was how little "hidden" actually means in a mobile app — a token or key buried in compiled bytecode still gets pulled out in minutes with the right tools, and the most damaging finding (F004) wasn't some exotic exploit, it was a basic design decision (one encryption key shared across every install) that quietly broke the whole security model. It changed how I think about client-side vs. server-side trust, and gave me a much more concrete feel for what "defense in depth" actually looks like in practice — which is a big part of why I'm drawn to SOC/blue team work.
 
 ## Skills Demonstrated
 
@@ -54,7 +53,7 @@ This project was a black-box / static-analysis security assessment of an Android
 
 ## Team
 
-Group project — Mobile Penetration Testing coursework, BINUS University.
+Group project of 5 — Mobile Penetration Testing coursework, BINUS University. We worked closely together across the full process rather than splitting into isolated tracks.
 
 ---
 *This report was produced for academic purposes. Findings were responsibly limited to non-destructive testing; no user data was collected, retained, or misused during the assessment.*
