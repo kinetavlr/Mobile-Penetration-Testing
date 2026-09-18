@@ -2,7 +2,7 @@
 
 > Vulnerability Assessment conducted as part of the *Mobile Penetration Testing* course, Group 4. Target: an internal Android application used to manage dormitory operations at a university.
 >
-> ⚠️ **Note on scope:** This repository contains a sanitized, high-level summary only. The full technical report (including exact endpoints, tokens, and proof-of-concept scripts) is **not published here**, since the target application was live/in production at the time of testing and some findings may still be unremediated. Sharing exploitable details publicly could put real users' data at risk. The complete report is available privately on request (e.g. for academic or recruiting purposes).
+> **Note on scope:** This repository contains a sanitized, high-level summary only. The full technical report (including exact endpoints, tokens, and proof-of-concept scripts) is **not published here**, since the target application was live/in production at the time of testing and some findings may still be unremediated. Sharing exploitable details publicly could put real users' data at risk. The complete report is available privately on request (e.g. for academic or recruiting purposes).
 
 ## Overview
 
